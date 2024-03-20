@@ -109,7 +109,7 @@ To compile and run the programs, follow these steps:
 2. Clone this repository or download the source files.
 3. Navigate to the project directory in your terminal.
 4. Create a build directory:
-``mkdir build``
+This is a <span style="color:blue">blue</span>``mkdir build``
 ``cd build``
 5. Generate the build files using CMake:
 ``cmake ..``
@@ -118,5 +118,5 @@ To compile and run the programs, follow these steps:
 7. Once the build process is complete, you can find the executable files in the `build` directory.
 8. Run the desired program:
 ``./executable_name``
-Once the build process is complete, you will find the executable files in the `build/src` directory. You can runeach executable as desired.
+
 
