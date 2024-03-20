@@ -109,7 +109,7 @@ To compile and run the programs, follow these steps:
 2. Clone this repository or download the source files.
 3. Navigate to the project directory in your terminal.
 4. Create a build directory:
-<span style="color:blue">make</span>
+<font color="blue">make</font>
 ``cd build``
 5. Generate the build files using CMake:
 ``cmake ..``
