@@ -29,7 +29,6 @@ jobs:
 
       - name: Run clang-tidy
         run: |
-          cd build
           clang-tidy -p . src/*.c
 
       - name: Format C source files
