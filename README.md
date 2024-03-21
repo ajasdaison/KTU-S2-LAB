@@ -28,7 +28,7 @@ This repository contains C programs for various lab experiments. Each experiment
 21. [Input and Print the elements of an array using pointers](src/20-array-pointers-input-output.c)
 22. [Compute sum of the elements stored in an array using pointers and user-defined function](src/21-sum-array-pointers.c)
 23. [Create a file and perform the following: (iii) Write data to the file, (iv) Read the data in a given file & display the file content on console, (v) append new data and display on console](src/22-file-operations.c)
-24. [Open a text input file and count the number of characters, words and lines in it; and store the results in an output file](src/23-count-characters-words-lines.c)
+24. [Open a text input file and count the number of characters, words and lines in it; and store the results in an output file](src/23-count-characters.c)
 
 ## How to Run
 To compile and run the programs, follow these steps:
