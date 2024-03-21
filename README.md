@@ -24,7 +24,7 @@ This repository contains C programs for various lab experiments. Each experiment
 17. [Find the factorial of a given Natural Number n using recursive and non-recursive functions](src/16-factorial.c)
 18. [Read a string (word), store it in an array and obtain its reverse by using a user-defined function](src/17-reverse-string.c)
 19. [Write a menu-driven program for performing matrix addition, multiplication and finding the transpose. Use functions to (i) read a matrix, (ii) find the sum of two matrices, (iii) find the product of two matrices, (i) find the transpose of a matrix and (v) display a matrix](src/18-matrix-operations.c)
-20. [Do the following using pointers: (i) add two numbers, (ii) swap two numbers using a user-defined function](src/19-pointers-add-swap.c)
+20. [Do the following using pointers: (i) add two numbers, (ii) swap two numbers using a user-defined function](src/19-ii-pointers-swap.c)
 21. [Input and Print the elements of an array using pointers](src/20-array-pointers-input-output.c)
 22. [Compute sum of the elements stored in an array using pointers and user-defined function](src/21-sum-array-pointers.c)
 23. [Create a file and perform the following: (iii) Write data to the file, (iv) Read the data in a given file & display the file content on console, (v) append new data and display on console](src/22-file-operations.c)
