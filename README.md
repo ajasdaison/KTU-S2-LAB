@@ -8,43 +8,43 @@ This repository contains C programs for various lab experiments. Each experiment
 
 1. **Familiarization of Hardware Components of a Computer**
    - Description: Introduction to basic hardware components of a computer.
-   - [Source Code](src/3-i-hello-world.c)
+   - [Source Code](src/03-i-hello-world.c)
 
 2. **Familiarization of Linux environment – How to do Programming in C with Linux**
     - Description: Getting started with programming in C on a Linux environment.
-    - [Source Code](src/3-ii-sum.c)
+    - [Source Code](src/03-ii-sum.c)
 
 3. **Familiarization of console I/O and operators in C**
     - Description: Basic console input/output and operators in C.
-    - [Source Code](src/3-iii-radius.c)
+    - [Source Code](src/03-iii-radius.c)
 
 4. **Evaluate the arithmetic expression**
     - Description: Program to evaluate a given arithmetic expression and display its solution.
-    - [Source Code](src/3-iv-expression.c)
+    - [Source Code](src/03-iv-expression.c)
 
 5. **Read 3 integer values and find the largest among them**
     - Description: Program to find the largest among three integer values.
-    - [Source Code](src/4-largest-among-three.c)
+    - [Source Code](src/04-largest-among-three.c)
 
 6. **Read a Natural Number and check whether the number is prime or not**
     - Description: Program to check if a given number is prime or not.
-    - [Source Code](src/5-prime-or-not.c)
+    - [Source Code](src/05-prime-or-not.c)
 
 7. **Read a Natural Number and check whether the number is Armstrong or not**
     - Description: Program to check if a given number is an Armstrong number.
-    - [Source Code](src/6-armstrong-number.c)
+    - [Source Code](src/06-armstrong-number.c)
 
 8. **Read n integers, store them in an array and find their sum and average**
     - Description: Program to calculate the sum and average of integers stored in an array.
-    - [Source Code](src/7-sum-and-average.c)
+    - [Source Code](src/07-sum-and-average.c)
 
 9. **Read n integers, store them in an array and search for an element in the array using an algorithm for Linear Search**
     - Description: Program to search for an element in an array using Linear Search algorithm.
-    - [Source Code](src/8-linear-search.c)
+    - [Source Code](src/08-linear-search.c)
 
 10. **Read n integers, store them in an array and sort the elements in the array using Bubble Sort algorithm**
     - Description: Program to sort integers in an array using Bubble Sort algorithm.
-    - [Source Code](src/9-bubble-sort.c)
+    - [Source Code](src/09-bubble-sort.c)
 
 11. **Read a string (word), store it in an array and check whether it is a palindrome word or not**
     - Description: Program to check if a given word is a palindrome.
