@@ -14,7 +14,6 @@ jobs:
 
     steps:
       - name: Checkout repository
-        name: Checkout src
         uses: actions/checkout@v2
 
       - name: Install dependencies
@@ -39,4 +38,4 @@ jobs:
 
       - name: Format CMake source files
         run: |
-          find . -name 'CMakeLists.txt' -exec cmake-format -i {} \;
+          find src/ -name 'CMakeLists.txt' -exec cmake-format -i {} \;
