@@ -8,16 +8,16 @@ project(LabExperiments C)
 
 # Add source files
 set(SOURCE_FILES
-	3-i-hello-world.c
-	3-ii-sum.c
-	3-iii-radius.c
-	3-iv-expression.c
-	4-largest-among-three.c
-	5-prime-or-not.c
-	6-armstrong-number.c
-	7-sum-and-average.c
-	8-linear-search.c
-	9-bubble-sort.c
+	03-i-hello-world.c
+	03-ii-sum.c
+	03-iii-radius.c
+	03-iv-expression.c
+	04-largest-among-three.c
+	05-prime-or-not.c
+	06-armstrong-number.c
+	07-sum-and-average.c
+	08-linear-search.c
+	09-bubble-sort.c
 	10-palindrome-word.c
 	11-concatenate-strings.c
 	12-count-vowels-consonants-spaces.c
@@ -30,9 +30,9 @@ set(SOURCE_FILES
 	19-i-pointers-add.c
 	19-ii-pointers-swap.c
 	20-array-pointers-input-output.c
-	21-sum-array-pointers
+	21-sum-array-pointers.c
 	22-file-operations.c
-	23-count-characters.c
+	23-count-characters.c	
 )
 # Create executable for each source file
 foreach(SOURCE_FILE ${SOURCE_FILES})
