@@ -10,7 +10,7 @@ int main() {
   } else if (num == 2) {
     printf("2 is a prime number");
   } else {
-    for (i = 2; i < num; i++) {
+    for (i = 2; i <= num/2; i++) {
       if (num % i == 0) {
         flag = 1;
         break;
