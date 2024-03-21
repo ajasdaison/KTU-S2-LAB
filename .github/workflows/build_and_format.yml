@@ -1,4 +1,5 @@
 name: Build and Format
+
 on:
   push:
     branches:
@@ -6,30 +7,35 @@ on:
   pull_request:
     branches:
       - main  # change to your main branch name
+
 jobs:
   build_and_format:
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-            uses: actions/checkout@v2
+        uses: actions/checkout@v2
+
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y
-clang-format clang-tidy python3 python3-pip
+          sudo apt-get install -y clang-format clang-tidy python3 python3-pip
           python3 -m pip install cmake-format
+
       - name: Build and test with CMake
         run: |
-          cmake -B build -S .
--DEXPORT_COMPILE_COMMANDS=ON
+          cmake -B build -S . -DEXPORT_COMPILE_COMMANDS=ON
           cmake --build build
+
       - name: Run clang-tidy
         run: |
           cd build
           clang-tidy -p . src/*.c
+
       - name: Format C source files
         run: |
           find src/ -name '*.c' -exec clang-format -i {} \;
+
       - name: Format CMake source files
         run: |
           find . -name 'CMakeLists.txt' -exec cmake-format -i {} \;
