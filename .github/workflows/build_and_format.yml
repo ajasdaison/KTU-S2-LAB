@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and test with CMake
         run: |
-          cmake -B build -S . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake -B build -S . -DEXPORT_COMPILE_COMMANDS=ON
           cmake --build build
 
       - name: Run clang-tidy
@@ -33,7 +33,7 @@ jobs:
 
       - name: Format C source files
         run: |
-          find src/ -name '*.c' -exec clang-format -i {} \;
+          find src/ -name '*.c' -exec clang-format -i -style=Google -QualifierAlignment=Left {} \;
 
       - name: Format CMake source files
         run: |
