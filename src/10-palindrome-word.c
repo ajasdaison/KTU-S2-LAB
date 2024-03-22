@@ -1,11 +1,12 @@
 // Read a string (word), store it in an array and check whether it is a
 // palindrome word or not.
 #include <stdio.h>
+#define MAX_WORD_LENGTH 100
 
 int main() {
-  char word[100];
-  int i, length = 0;
-  int isPalindrome = 1;
+  char word[MAX_WORD_LENGTH];
+  int i, length = 0;  // NOLINT
+  int is_palindrome = 1;
 
   printf("Enter a word: ");
   scanf("%s", word);
@@ -16,12 +17,12 @@ int main() {
 
   for (i = 0; i < length / 2; i++) {
     if (word[i] != word[length - i - 1]) {
-      isPalindrome = 0;
+      is_palindrome = 0;
       break;
     }
   }
 
-  if (isPalindrome)
+  if (is_palindrome)
     printf("%s is a palindrome.\n", word);
   else
     printf("%s is not a palindrome.\n", word);

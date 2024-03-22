@@ -6,7 +6,7 @@
 int main() {
   int arr[MAX_SIZE];
   int *ptr;
-  int size, i;
+  int size, i;  // NOLINT
 
   printf("Enter the size of the array: ");
   scanf("%d", &size);

@@ -2,8 +2,9 @@
 // user defined function.
 #include <stdio.h>
 #include <string.h>
+#define MAX_WORD_LENGTH 100
 
-void reverseString(char *str) {
+void reverse_string(char *str) {
   int length = strlen(str);
   int start = 0;
   int end = length - 1;
@@ -18,14 +19,14 @@ void reverseString(char *str) {
 }
 
 int main() {
-  char str[100];
+  char str[MAX_WORD_LENGTH];
 
   printf("Enter a string: ");
   scanf("%s", str);
 
   printf("Original string: %s\n", str);
 
-  reverseString(str);
+  reverse_string(str);
 
   printf("Reversed string: %s\n", str);
 

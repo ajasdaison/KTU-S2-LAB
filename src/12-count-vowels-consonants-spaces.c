@@ -1,10 +1,11 @@
 // Read a string (ending with a $ symbol), store it in an array and count the
 // number of vowels, consonants and spaces in it.
 #include <stdio.h>
+#define MAX_WORD_LENGTH 100
 
 int main() {
-  char str[100];
-  int vowels = 0, consonants = 0, spaces = 0;
+  char str[MAX_WORD_LENGTH];
+  int vowels = 0, consonants = 0, spaces = 0;  // NOLINT
   printf("Enter a string (end with $): ");
   scanf("%[^$]s", str);
 

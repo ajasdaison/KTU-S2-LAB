@@ -1,10 +1,11 @@
 // Read two strings (each one ending with a $ symbol), store them in arrays and
 // concatenate them without using library functions.
 #include <stdio.h>
+#define MAX_WORD_LENGTH 100
 
 int main() {
-  char str1[100], str2[100];
-  int i = 0, j = 0;
+  char str1[MAX_WORD_LENGTH], str2[MAX_WORD_LENGTH];  // NOLINT
+  int i = 0, j = 0;                                   // NOLINT
 
   printf("Enter the first string ending with $: ");
   while ((str1[i] = getchar()) != '$') {
