@@ -14,8 +14,8 @@ double distance(struct Point p1, struct Point p2) {
 }
 
 int main() {
-  struct Point point1, point2;
-  double dist1, dist2, totalDistance;
+  struct Point point1, point2;          // NOLINT
+  double dist1, dist2, total_distance;  // NOLINT
 
   printf("Enter coordinates of first point (x y): ");
   scanf("%lf %lf", &point1.x, &point1.y);
@@ -26,9 +26,9 @@ int main() {
   dist1 = distance(point1, point2);
   dist2 = distance(point2, point1);
 
-  totalDistance = dist1 + dist2;
+  total_distance = dist1 + dist2;
 
-  printf("Total distance between the two points: %.2f\n", totalDistance);
+  printf("Total distance between the two points: %.2f\n", total_distance);
 
   return 0;
 }

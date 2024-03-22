@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 int main() {
-  int n, i;
-  float sum = 0, average;
+  int n, i;                // NOLINT
+  float sum = 0, average;  // NOLINT
 
   printf("Enter the number of integers: ");
   scanf("%d", &n);
@@ -12,7 +12,7 @@ int main() {
 
   printf("Enter %d integers:\n", n);
   for (i = 0; i < n; i++) {
-    scanf("%d", &numbers[i]); // enter the number with spaces
+    scanf("%d", &numbers[i]);  // enter the number with spaces
     sum += numbers[i];
   }
 

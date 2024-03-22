@@ -3,10 +3,11 @@
 // Read the data in a given file & display the file content on console
 // append new data and display on console
 #include <stdio.h>
+#define MAX_WORD_LENGTH 100
 
 int main() {
   FILE *file;
-  char data[100];
+  char data[MAX_WORD_LENGTH];
 
   file = fopen("example.txt", "w");
   if (file == NULL) {

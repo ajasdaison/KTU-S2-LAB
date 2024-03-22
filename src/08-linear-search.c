@@ -6,8 +6,8 @@ int main() {
   printf("Enter the number of integers: ");
   scanf("%d", &n);
   int arr[n];
-  printf("Enter the integers:\n"); // enter the numbers by separating them with
-                                   // spaces
+  printf("Enter the integers:\n");  // enter the numbers by separating them with
+                                    // spaces
   for (int i = 0; i < n; i++) {
     scanf("%d", &arr[i]);
   }

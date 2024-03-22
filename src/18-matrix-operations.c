@@ -6,30 +6,30 @@
 
 #define MAX_SIZE 10
 
-void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
-void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
-void addMatrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
-                 int rows, int cols);
-void multiplyMatrices(int mat1[MAX_SIZE][MAX_SIZE],
-                      int mat2[MAX_SIZE][MAX_SIZE],
-                      int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
-                      int rows2, int cols2);
-void transposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void read_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void display_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
+void add_matrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
+                  int rows, int cols);
+void multiply_matrices(int mat1[MAX_SIZE][MAX_SIZE],
+                       int mat2[MAX_SIZE][MAX_SIZE],
+                       int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
+                       int rows2, int cols2);
+void transpose_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
 
 int main() {
-  int choice, rows1, cols1, rows2, cols2;
-  int matrix1[MAX_SIZE][MAX_SIZE], matrix2[MAX_SIZE][MAX_SIZE],
-      result[MAX_SIZE][MAX_SIZE];
+  int choice, rows1, cols1, rows2, cols2;                        // NOLINT
+  int matrix1[MAX_SIZE][MAX_SIZE], matrix2[MAX_SIZE][MAX_SIZE],  // NOLINT
+      result[MAX_SIZE][MAX_SIZE];                                // NOLINT
 
   printf("Enter the number of rows and columns for matrix 1: ");
   scanf("%d %d", &rows1, &cols1);
   printf("Enter the elements of matrix 1:\n");
-  readMatrix(matrix1, rows1, cols1);
+  read_matrix(matrix1, rows1, cols1);
 
   printf("Enter the number of rows and columns for matrix 2: ");
   scanf("%d %d", &rows2, &cols2);
   printf("Enter the elements of matrix 2:\n");
-  readMatrix(matrix2, rows2, cols2);
+  read_matrix(matrix2, rows2, cols2);
 
   do {
     printf("\nMenu:\n");
@@ -41,39 +41,41 @@ int main() {
     scanf("%d", &choice);
 
     switch (choice) {
-    case 1:
-      if (rows1 != rows2 || cols1 != cols2) {
-        printf("Matrices cannot be added: dimensions do not match.\n");
-      } else {
-        addMatrices(matrix1, matrix2, rows1, cols1);
-      }
-      break;
-    case 2:
-      if (cols1 != rows2) {
-        printf("Matrices cannot be multiplied: columns of matrix 1 must equal "
-               "rows of matrix 2.\n");
-      } else {
-        multiplyMatrices(matrix1, matrix2, result, rows1, cols1, rows2, cols2);
-      }
-      break;
-    case 3:
-      printf("Transpose of Matrix 1:\n");
-      transposeMatrix(matrix1, rows1, cols1);
-      printf("\nTranspose of Matrix 2:\n");
-      transposeMatrix(matrix2, rows2, cols2);
-      break;
-    case 4:
-      printf("Exiting program.\n");
-      break;
-    default:
-      printf("Invalid choice. Please enter a valid option.\n");
+      case 1:
+        if (rows1 != rows2 || cols1 != cols2) {
+          printf("Matrices cannot be added: dimensions do not match.\n");
+        } else {
+          add_matrices(matrix1, matrix2, rows1, cols1);
+        }
+        break;
+      case 2:
+        if (cols1 != rows2) {
+          printf(
+              "Matrices cannot be multiplied: columns of matrix 1 must equal "
+              "rows of matrix 2.\n");
+        } else {
+          multiply_matrices(matrix1, matrix2, result, rows1, cols1, rows2,
+                            cols2);
+        }
+        break;
+      case 3:
+        printf("Transpose of Matrix 1:\n");
+        transpose_matrix(matrix1, rows1, cols1);
+        printf("\nTranspose of Matrix 2:\n");
+        transpose_matrix(matrix2, rows2, cols2);
+        break;
+      case 4:
+        printf("Exiting program.\n");
+        break;
+      default:
+        printf("Invalid choice. Please enter a valid option.\n");
     }
   } while (choice != 4);
 
   return 0;
 }
 
-void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
+void read_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       scanf("%d", &matrix[i][j]);
@@ -81,7 +83,8 @@ void readMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
   }
 }
 
-void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
+void display_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows,
+                    int cols) {  // NOLINT
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       printf("%d\t", matrix[i][j]);
@@ -90,8 +93,8 @@ void displayMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
   }
 }
 
-void addMatrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
-                 int rows, int cols) {
+void add_matrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
+                  int rows, int cols) {
   int sum[MAX_SIZE][MAX_SIZE];
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
@@ -99,13 +102,13 @@ void addMatrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
     }
   }
   printf("Sum of Matrices:\n");
-  displayMatrix(sum, rows, cols);
+  display_matrix(sum, rows, cols);
 }
 
-void multiplyMatrices(int mat1[MAX_SIZE][MAX_SIZE],
-                      int mat2[MAX_SIZE][MAX_SIZE],
-                      int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
-                      int rows2, int cols2) {
+void multiply_matrices(int mat1[MAX_SIZE][MAX_SIZE],
+                       int mat2[MAX_SIZE][MAX_SIZE],
+                       int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
+                       int rows2, int cols2) {  // NOLINT
   for (int i = 0; i < rows1; i++) {
     for (int j = 0; j < cols2; j++) {
       result[i][j] = 0;
@@ -115,15 +118,15 @@ void multiplyMatrices(int mat1[MAX_SIZE][MAX_SIZE],
     }
   }
   printf("Product of Matrices:\n");
-  displayMatrix(result, rows1, cols2);
+  display_matrix(result, rows1, cols2);
 }
 
-void transposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
+void transpose_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
   int transposed[MAX_SIZE][MAX_SIZE];
   for (int i = 0; i < cols; i++) {
     for (int j = 0; j < rows; j++) {
       transposed[i][j] = matrix[j][i];
     }
   }
-  displayMatrix(transposed, cols, rows);
+  display_matrix(transposed, cols, rows);  // NOLINT
 }

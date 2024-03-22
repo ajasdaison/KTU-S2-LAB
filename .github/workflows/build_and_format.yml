@@ -1,12 +1,11 @@
 name: Build and Format
-
 on:
   push:
     branches:
-      - main
+      - main  # change to your main branch name
   pull_request:
     branches:
-      - main
+      - main  # change to your main branch name
 
 jobs:
   build_and_format:
@@ -14,12 +13,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+        uses: actions/checkout@v2
 
       - name: Install dependencies
         run: |
@@ -27,35 +21,17 @@ jobs:
           sudo apt-get install -y clang-format clang-tidy python3 python3-pip
           python3 -m pip install cmake-format
 
+
       - name: Build and test with CMake
         run: |
           cmake -B build -S . -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
           cmake --build build
 
-      - name: Run clang-tidy
+      - name: Run clang-tidy and Format C source files
         run: |
-          clang-tidy -p src/*.c
-
-      - name: Format C source files
-        run: |
-          find src/ -name '*.c' -exec clang-format -i -style=Google -QualifierAlignment=Left {} \;
+          clang-tidy ./src/*.c -p ./build -- -I./include
+          python3 run-clang-format.py --style file -r src
 
       - name: Format CMake source files
         run: |
-          find src/ -name 'CMakeLists.txt' -exec cmake-format -i {} \;
-
-HeaderFilterRegex: "(google/cloud/|generator/).*\\.h$"
-
-CheckOptions:
-  - { key: readability-identifier-naming.NamespaceCase,          value: lower_case }
-  - { key: readability-identifier-naming.ClassCase,              value: CamelCase  }
-  - { key: readability-identifier-naming.StructCase,             value: CamelCase  }
-  - { key: readability-identifier-naming.TemplateParameterCase,  value: CamelCase  }
-  - { key: readability-identifier-naming.FunctionCase,           value: lower_case }
-  - { key: readability-identifier-naming.VariableCase,           value: lower_case }
-  - { key: readability-identifier-naming.ClassMemberCase,        value: lower_case }
-  - { key: readability-identifier-naming.ClassMethodCase,        value: lower_case }
-  - { key: readability-identifier-naming.ClassMemberSuffix,      value: _          }
-  - { key: readability-identifier-naming.PrivateMemberSuffix,    value: _          }
-  - { key: readability-identifier-naming.ProtectedMemberSuffix,  value: _          }
-  - { key: readability-identifier-naming.EnumConstantCase,         value: CamelCase }
+          cmake-format --check $(find . -iname "CMakeLists.txt")

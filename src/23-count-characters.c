@@ -2,12 +2,13 @@
 // and store the results in an output file.
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX_WORD_LENGTH 100
 
 int main() {
-  FILE *input_file, *output_file;
-  char filename[100];
+  FILE *input_file, *output_file;  // NOLINT
+  char filename[MAX_WORD_LENGTH];
   int ch;
-  int characters = 0, words = 0, lines = 0;
+  int characters = 0, words = 0, lines = 0;  // NOLINT
 
   printf("Enter the name of the input file: ");
   scanf("%s", filename);

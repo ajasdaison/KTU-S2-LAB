@@ -6,14 +6,14 @@
 #define C_SIZE 50
 
 union Address {
-  char Name[C_SIZE];
-  char HouseName[C_SIZE];
-  char City[C_SIZE];
-  char State[C_SIZE];
-  char PinCode[C_SIZE];
+  char name[C_SIZE];
+  char house_name[C_SIZE];
+  char city[C_SIZE];
+  char state[C_SIZE];
+  char pin_code[C_SIZE];
 };
 
-void removeNewline(char *str) {
+void remove_newline(char *str) {
   int i = 0;
   while (str[i] != '\n' && str[i] != '\0') {
     i++;
@@ -24,34 +24,34 @@ void removeNewline(char *str) {
 }
 
 int main() {
-  union Address personAddress;
+  union Address person_address;
 
   printf("Enter Name: ");
-  fgets(personAddress.Name, C_SIZE, stdin);
-  removeNewline(personAddress.Name);
+  fgets(person_address.name, C_SIZE, stdin);
+  remove_newline(person_address.name);
 
   printf("Enter House Name: ");
-  fgets(personAddress.HouseName, C_SIZE, stdin);
-  removeNewline(personAddress.HouseName);
+  fgets(person_address.house_name, C_SIZE, stdin);
+  remove_newline(person_address.house_name);
 
   printf("Enter City: ");
-  fgets(personAddress.City, C_SIZE, stdin);
-  removeNewline(personAddress.City);
+  fgets(person_address.city, C_SIZE, stdin);
+  remove_newline(person_address.city);
 
   printf("Enter State: ");
-  fgets(personAddress.State, C_SIZE, stdin);
-  removeNewline(personAddress.State);
+  fgets(person_address.state, C_SIZE, stdin);
+  remove_newline(person_address.state);
 
   printf("Enter Pin Code: ");
-  fgets(personAddress.PinCode, C_SIZE, stdin);
-  removeNewline(personAddress.PinCode);
+  fgets(person_address.pin_code, C_SIZE, stdin);
+  remove_newline(person_address.pin_code);
 
   printf("\nAddress:\n");
-  printf("Name: %s\n", personAddress.Name);
-  printf("House Name: %s\n", personAddress.HouseName);
-  printf("City: %s\n", personAddress.City);
-  printf("State: %s\n", personAddress.State);
-  printf("Pin Code: %s\n", personAddress.PinCode);
+  printf("Name: %s\n", person_address.name);
+  printf("House Name: %s\n", person_address.house_name);
+  printf("City: %s\n", person_address.city);
+  printf("State: %s\n", person_address.state);
+  printf("Pin Code: %s\n", person_address.pin_code);
 
   return 0;
 }

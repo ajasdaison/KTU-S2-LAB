@@ -2,7 +2,7 @@
  * solution. Read the values of the variables from the user through console.*/
 #include <stdio.h>
 int main() {
-  int a, b, c, d, e, f, g;
+  int a, b, c, d, e, f, g;  // NOLINT
   printf("Enter the digits a,b,c,d,e,f,g:\t");
   scanf("%d,%d,%d,%d,%d,%d,%d", &a, &b, &c, &d, &e, &f, &g);
   int s;
