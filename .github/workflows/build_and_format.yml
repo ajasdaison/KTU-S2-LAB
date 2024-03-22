@@ -29,7 +29,7 @@ jobs:
 
       - name: Run clang-tidy
         run: |
-          clang-tidy -p . src/*.c
+          clang-tidy -p src/*.c
 
       - name: Format C source files
         run: |
