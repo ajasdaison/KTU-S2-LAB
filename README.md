@@ -5,10 +5,10 @@
 This repository contains C programs for various lab experiments. Each experiment is contained in aseparate file. You can find the source code for each experiment below:
 
 ## Experiment List
-1. Familiarization of Linux environment –
-    1. [How to do Programming in C with Linux](src/03-i-hello-world.c)
+1. Familiarization of console I/O and operators in C –
+    1. [Display "Hello World](src/03-i-hello-world.c)
     2. [Findimg sum of two numbers](src/03-ii-sum.c)
-    3. [Familiarization of console I/O and operators in C](src/03-iii-radius.c)
+    3. [Read the radius of a circle, calculate its area and display it](src/03-iii-radius.c)
     4. [Evaluate the arithmetic expression](src/03-iv-expression.c)
 2. [Read 3 integer values and find the largest among them](src/04-largest-among-three.c)
 3. [Read a Natural Number and check whether the number is prime or not](src/05-prime-or-not.c)
@@ -30,7 +30,10 @@ This repository contains C programs for various lab experiments. Each experiment
     2. [swap two numbers using a user-defined function](src/19-ii-pointers-swap.c)
 18. [Input and Print the elements of an array using pointers](src/20-array-pointers-input-output.c)
 19. [Compute sum of the elements stored in an array using pointers and user-defined function](src/21-sum-array-pointers.c)
-20. [Create a file and perform the following: (iii) Write data to the file, (iv) Read the data in a given file & display the file content on console, (v) append new data and display on console](src/22-file-operations.c)
+20. [Create a file and perform the following: 
+    (i) Write data to the file, 
+    (ii) Read the data in a given file & display the file content on console
+    (iii) append new data and display on console](src/22-file-operations.c)
 21. [Open a text input file and count the number of characters, words and lines in it; and store the results in an output file](src/23-count-characters.c)
 
 ## How to Run
