@@ -1,132 +1,191 @@
-// Write a menu driven program for performing matrix addition, multiplication
-// and finding the transpose. Use functions to (i) read a matrix, (ii) find the
-// sum of two matrices, (iii) find the product of two matrices, (i) find the
-// transpose of a matrix and (v) display a matrix.
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_SIZE 10
+typedef struct {
+  int *data;
+  size_t rows;
+  size_t cols;
+} Matrix;
 
-void read_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
-void display_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
-void add_matrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
-                  int rows, int cols);
-void multiply_matrices(int mat1[MAX_SIZE][MAX_SIZE],
-                       int mat2[MAX_SIZE][MAX_SIZE],
-                       int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
-                       int rows2, int cols2);
-void transpose_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols);
+Matrix *matrix_create(size_t rows, size_t cols) {
+  Matrix *mat = (Matrix *)malloc(sizeof(Matrix));
+  if (mat == NULL) {
+    fprintf(stderr, "Memory allocation failed.\n");
+    exit(EXIT_FAILURE);
+  }
+  mat->data = (int *)malloc(rows * cols * sizeof(int));
+  if (mat->data == NULL) {
+    fprintf(stderr, "Memory allocation failed.\n");
+    exit(EXIT_FAILURE);
+  }
+  mat->rows = rows;
+  mat->cols = cols;
+  return mat;
+}
 
-int main() {
-  int choice, rows1, cols1, rows2, cols2;                        // NOLINT
-  int matrix1[MAX_SIZE][MAX_SIZE], matrix2[MAX_SIZE][MAX_SIZE],  // NOLINT
-      result[MAX_SIZE][MAX_SIZE];                                // NOLINT
+void matrix_destroy(Matrix *matrix) {
+  free(matrix->data);
+  free(matrix);
+}
 
-  printf("Enter the number of rows and columns for matrix 1: ");
-  scanf("%d %d", &rows1, &cols1);
-  printf("Enter the elements of matrix 1:\n");
-  read_matrix(matrix1, rows1, cols1);
-
-  printf("Enter the number of rows and columns for matrix 2: ");
-  scanf("%d %d", &rows2, &cols2);
-  printf("Enter the elements of matrix 2:\n");
-  read_matrix(matrix2, rows2, cols2);
-
-  do {
-    printf("\nMenu:\n");
-    printf("1. Add Matrices\n");
-    printf("2. Multiply Matrices\n");
-    printf("3. Transpose Matrix\n");
-    printf("4. Exit\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-
-    switch (choice) {
-      case 1:
-        if (rows1 != rows2 || cols1 != cols2) {
-          printf("Matrices cannot be added: dimensions do not match.\n");
-        } else {
-          add_matrices(matrix1, matrix2, rows1, cols1);
-        }
-        break;
-      case 2:
-        if (cols1 != rows2) {
-          printf(
-              "Matrices cannot be multiplied: columns of matrix 1 must equal "
-              "rows of matrix 2.\n");
-        } else {
-          multiply_matrices(matrix1, matrix2, result, rows1, cols1, rows2,
-                            cols2);
-        }
-        break;
-      case 3:
-        printf("Transpose of Matrix 1:\n");
-        transpose_matrix(matrix1, rows1, cols1);
-        printf("\nTranspose of Matrix 2:\n");
-        transpose_matrix(matrix2, rows2, cols2);
-        break;
-      case 4:
-        printf("Exiting program.\n");
-        break;
-      default:
-        printf("Invalid choice. Please enter a valid option.\n");
+void matrix_display(FILE *fp, const Matrix *matrix) {
+  for (size_t i = 0; i < matrix->rows; i++) {
+    for (size_t j = 0; j < matrix->cols; j++) {
+      fprintf(fp, "%d ", matrix->data[i * matrix->cols + j]);
     }
-  } while (choice != 4);
+    fprintf(fp, "\n");
+  }
+}
 
+int matrix_write(const char *filename, const Matrix *matrix) {
+  FILE *file = fopen(filename, "wb");
+  if (file == NULL) {
+    fprintf(stderr, "Error opening file for writing.\n");
+    return -1;
+  }
+  fwrite(&matrix->rows, sizeof(size_t), 1, file);
+  fwrite(&matrix->cols, sizeof(size_t), 1, file);
+  fwrite(matrix->data, sizeof(int), matrix->rows * matrix->cols, file);
+  fclose(file);
   return 0;
 }
 
-void read_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      scanf("%d", &matrix[i][j]);
+Matrix *matrix_read(const char *filename) {
+  FILE *file = fopen(filename, "rb");
+  if (file == NULL) {
+    fprintf(stderr, "Error opening file for reading.\n");
+    return NULL;
+  }
+  Matrix *mat = (Matrix *)malloc(sizeof(Matrix));
+  if (mat == NULL) {
+    fprintf(stderr, "Memory allocation failed.\n");
+    exit(EXIT_FAILURE);
+  }
+  fread(&mat->rows, sizeof(size_t), 1, file);
+  fread(&mat->cols, sizeof(size_t), 1, file);
+  mat->data = (int *)malloc(mat->rows * mat->cols * sizeof(int));
+  if (mat->data == NULL) {
+    fprintf(stderr, "Memory allocation failed.\n");
+    exit(EXIT_FAILURE);
+  }
+  fread(mat->data, sizeof(int), mat->rows * mat->cols, file);
+  fclose(file);
+  return mat;
+}
+
+void matrix_add(const Matrix *A, const Matrix *B, Matrix *C) {
+  if ((A->rows != B->rows) && (A->cols != B->cols)) {
+    fprintf(stderr, "Matrix dimensions are not compatible for addition.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  for (size_t i = 0; i < A->rows; i++) {
+    for (size_t j = 0; j < A->cols; j++) {
+      C->data[i * A->cols + j] =
+          A->data[i * A->cols + j] + B->data[i * A->cols + j];
     }
   }
 }
 
-void display_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows,
-                    int cols) {  // NOLINT
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      printf("%d\t", matrix[i][j]);
+void matrix_sub(const Matrix *A, const Matrix *B, Matrix *C) {
+  for (size_t i = 0; i < A->rows; i++) {
+    for (size_t j = 0; j < A->cols; j++) {
+      C->data[i * A->cols + j] =
+          A->data[i * A->cols + j] - B->data[i * A->cols + j];
     }
-    printf("\n");
   }
 }
 
-void add_matrices(int mat1[MAX_SIZE][MAX_SIZE], int mat2[MAX_SIZE][MAX_SIZE],
-                  int rows, int cols) {
-  int sum[MAX_SIZE][MAX_SIZE];
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      sum[i][j] = mat1[i][j] + mat2[i][j];
+void matrix_emul(const Matrix *A, const Matrix *B, Matrix *C) {
+  for (size_t i = 0; i < A->rows; i++) {
+    for (size_t j = 0; j < A->cols; j++) {
+      C->data[i * A->cols + j] =
+          A->data[i * A->cols + j] * B->data[i * A->cols + j];
     }
   }
-  printf("Sum of Matrices:\n");
-  display_matrix(sum, rows, cols);
 }
 
-void multiply_matrices(int mat1[MAX_SIZE][MAX_SIZE],
-                       int mat2[MAX_SIZE][MAX_SIZE],
-                       int result[MAX_SIZE][MAX_SIZE], int rows1, int cols1,
-                       int rows2, int cols2) {  // NOLINT
-  for (int i = 0; i < rows1; i++) {
-    for (int j = 0; j < cols2; j++) {
-      result[i][j] = 0;
-      for (int k = 0; k < cols1; k++) {
-        result[i][j] += mat1[i][k] * mat2[k][j];
+void matrix_mul(const Matrix *A, const Matrix *B, Matrix *C) {
+  if (A->cols != B->rows) {
+    fprintf(stderr,
+            "Matrix dimensions are not compatible for multiplication.\n");
+    exit(EXIT_FAILURE);
+  }
+  C->rows = A->rows;
+  C->cols = B->cols;
+  C->data = (int *)malloc(C->rows * C->cols * sizeof(int));
+  for (size_t i = 0; i < A->rows; i++) {
+    for (size_t j = 0; j < B->cols; j++) {
+      int sum = 0;
+      for (size_t k = 0; k < A->cols; k++) {
+        sum += A->data[i * A->cols + k] * B->data[k * B->cols + j];
       }
+      C->data[i * C->cols + j] = sum;
     }
   }
-  printf("Product of Matrices:\n");
-  display_matrix(result, rows1, cols2);
 }
 
-void transpose_matrix(int matrix[MAX_SIZE][MAX_SIZE], int rows, int cols) {
-  int transposed[MAX_SIZE][MAX_SIZE];
-  for (int i = 0; i < cols; i++) {
-    for (int j = 0; j < rows; j++) {
-      transposed[i][j] = matrix[j][i];
+// Function to take input for a matrix from the user
+void matrix_input(Matrix *matrix) {
+  printf("Enter the elements of the matrix:\n");
+  for (size_t i = 0; i < matrix->rows; i++) {
+    for (size_t j = 0; j < matrix->cols; j++) {
+      printf("Element [%zu][%zu]: ", i, j);
+      scanf("%d", &(matrix->data[i * matrix->cols + j]));
     }
   }
-  display_matrix(transposed, cols, rows);  // NOLINT
+}
+
+int main() {
+  size_t rows, cols;
+  printf("Enter the number of rows and columns for matrix A: ");
+  scanf("%zu %zu", &rows, &cols);
+  Matrix *A = matrix_create(rows, cols);
+  matrix_input(A);
+
+  printf("Enter the number of rows and columns for matrix B: ");
+  scanf("%zu %zu", &rows, &cols);
+  Matrix *B = matrix_create(rows, cols);
+  matrix_input(B);
+  // Displaying matrix A
+  printf("Matrix A:\n");
+  matrix_display(stdout, A);
+
+  // Displaying matrix B
+  printf("\nMatrix B:\n");
+  matrix_display(stdout, B);
+
+  // Add
+  Matrix *C_add = matrix_create(A->rows, A->cols);
+  matrix_add(A, B, C_add);
+  printf("\nResult of A + B:\n");
+  matrix_display(stdout, C_add);
+
+  // Sub
+  Matrix *C_sub = matrix_create(A->rows, A->cols);
+  matrix_sub(A, B, C_sub);
+  printf("\nResult of A - B:\n");
+  matrix_display(stdout, C_sub);
+
+  // emul
+  Matrix *C_emul = matrix_create(A->rows, A->cols);
+  matrix_emul(A, B, C_emul);
+  printf("\nResult of element multi:\n");
+  matrix_display(stdout, C_emul);
+
+  // mul
+  Matrix *C_mul = matrix_create(A->rows, A->cols);
+  matrix_mul(A, B, C_mul);
+  printf("\nResult of matrix multi:\n");
+  matrix_display(stdout, C_mul);
+
+  // Freeing memory
+  matrix_destroy(A);
+  matrix_destroy(B);
+  matrix_destroy(C_add);
+  matrix_destroy(C_sub);
+  matrix_destroy(C_emul);
+  matrix_destroy(C_mul);
+
+  return 0;
 }
