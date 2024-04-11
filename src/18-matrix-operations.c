@@ -113,7 +113,6 @@ void matrix_mul(const Matrix *A, const Matrix *B, Matrix *C) {
   }
   C->rows = A->rows;
   C->cols = B->cols;
-  C->data = (int *)malloc(C->rows * C->cols * sizeof(int));
   for (size_t i = 0; i < A->rows; i++) {
     for (size_t j = 0; j < B->cols; j++) {
       int sum = 0;
